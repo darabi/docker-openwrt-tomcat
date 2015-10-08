@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+sh $TOMCAT_HOME/bin/catalina.sh run
