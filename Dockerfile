@@ -16,6 +16,15 @@ RUN mkdir -p /mnt/packs
 
 ADD dist/ /mnt/packs
 
+ENV MAX_THREADS 200
+ENV MAX_CONNECTIONS 1000
+ENV ACCEPT_COUNT 100
+ENV MIN_SPARE_THREADS 100
+
+ENV JVM_ARG_XMS 128m
+ENV JVM_ARG_XMX 256m
+ENV JVM_ARG_XSS 128m
+
 # Download TOMCAT and installing it
 RUN opkg update && \
   opkg install libapr libaprutil && \
@@ -27,6 +36,7 @@ RUN opkg update && \
   rm -f ${CATALINA_HOME}/bin/*.bat && \
   echo "export PATH=$PATH:$JAVA_HOME/bin/bundled:${CATALINA_HOME}/bin" >> /etc/profile && \
   echo "export CATALINA_HOME=${CATALINA_HOME}" >> /etc/profile
+
 
 # Expose port
 EXPOSE 8080

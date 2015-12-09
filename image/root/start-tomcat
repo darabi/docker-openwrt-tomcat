@@ -1,4 +1,8 @@
 #!/bin/bash
 
+#sed -i '1{G;s/$/export CATALINA_OPTS="$CATALINA_OPTS -server -Xms\${JVM_ARG_XMS} -Xmx\${JVM_ARG_XMX} -Xss\${JVM_ARG_XSS}"/}' $CATALINA_HOME/bin/catalina.sh
+export CATALINA_OPTS="$CATALINA_OPTS -server -Xms${JVM_ARG_XMS} -Xmx${JVM_ARG_XMX} -Xss${JVM_ARG_XSS}"
+sed -i "s|<Connector port=\"8080\" protocol=\"HTTP/1.1\"|<Connector port=\"8080\" protocol=\"HTTP/1.1\" minSpareThreads=\"${MIN_SPARE_THREADS}\" maxThreads=\"${MAX_THREADS}\" acceptCount=\"{ACCEPT_COUNT}\" maxConnections=\"${MAX_CONNECTIONS}\"|g"  $CATALINA_HOME/conf/server.xml
+
 
 sh $CATALINA_HOME/bin/catalina.sh run
