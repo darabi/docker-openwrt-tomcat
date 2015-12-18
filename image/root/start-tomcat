@@ -8,4 +8,13 @@ then
 sed -i "s|<Connector port=\"8080\" protocol=\"HTTP/1.1\"|<!-- modified by docker--><Connector port=\"8080\" protocol=\"HTTP/1.1\" minSpareThreads=\"${MIN_SPARE_THREADS}\" maxThreads=\"${MAX_THREADS}\" acceptCount=\"${ACCEPT_COUNT}\" maxConnections=\"${MAX_CONNECTIONS}\"|g"  $CATALINA_HOME/conf/server.xml
 fi
 
+
+#CATALINA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"
+#CATALINA_OPTS="${CATALINA_OPTS} -Dcom.sun.management.jmxremote="
+#CATALINA_OPTS="${CATALINA_OPTS} -Dcom.sun.management.jmxremote.port=${JMX_PORT} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
+#CATALINA_OPTS="${CATALINA_OPTS} -Djava.rmi.server.hostname=192.168.65.57"
+#CATALINA_OPTS="${CATALINA_OPTS} -Djava.rmi.server.hostname=172.17.0.1"
+
+
 sh $CATALINA_HOME/bin/catalina.sh run
+#jpda start

@@ -25,6 +25,12 @@ ENV JVM_ARG_XMS 128m
 ENV JVM_ARG_XMX 256m
 ENV JVM_ARG_XSS 128m
 
+ENV JMX_PORT 6970
+EXPOSE 6970
+
+ENV JPDA_ADDRESS=8000
+ENV JPDA_TRANSPORT=dt_socket
+
 # Download TOMCAT and installing it
 RUN opkg update && \
   opkg install libapr libaprutil && \
