@@ -30,6 +30,10 @@ EXPOSE 6970
 
 ENV JPDA_ADDRESS=8000
 ENV JPDA_TRANSPORT=dt_socket
+ENV JPDA_XDEBUG_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=$JPDA_ADDRESS,server=y,suspend=n"
+ENV JPDA_RMI_SERVER_HOSTNAME=
+ENV JPDA_START=false
+EXPOSE $JPDA_ADDRESS
 
 # Download TOMCAT and installing it
 RUN opkg update && \
