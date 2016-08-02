@@ -31,14 +31,9 @@ docker run -it -p 8080:8080 -p 6970:6970 -p 8000:8000 \
 ```
 The remote debug settings in eclipse:
 ```
-<launchConfiguration type="org.eclipse.jdt.launching.remoteJavaApplication">
-...
-<mapAttribute key="org.eclipse.jdt.launching.CONNECT_MAP">
 hostname: localhost
 port: 8000
 ConnectionType: Standard(Socket Attach)
->
-
 ```
 
 
