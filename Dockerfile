@@ -4,17 +4,11 @@ FROM mcreations/openwrt-java:8
 
 MAINTAINER Reza Rahimi <rahimi@m-creations.net>
 
-ENV TOMCAT_VERSION=8.0.30
+ENV TOMCAT_VERSION=8.5.5
 
 ENV CATALINA_HOME /opt/apache-tomcat-${TOMCAT_VERSION}
 
-# ENV DIST_DIR /mnt/packs
-
 ADD image/root /
-
-# RUN mkdir -p /mnt/packs
-
-# ADD dist/ /mnt/packs
 
 ENV MAX_THREADS 200
 ENV MAX_CONNECTIONS 1000
