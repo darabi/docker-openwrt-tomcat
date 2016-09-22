@@ -4,17 +4,11 @@ FROM mcreations/openwrt-java:8
 
 MAINTAINER Reza Rahimi <rahimi@m-creations.net>
 
-ENV TOMCAT_VERSION=8.0.30
+ENV TOMCAT_VERSION=8.5.5
 
 ENV CATALINA_HOME /opt/apache-tomcat-${TOMCAT_VERSION}
 
-# ENV DIST_DIR /mnt/packs
-
 ADD image/root /
-
-# RUN mkdir -p /mnt/packs
-
-# ADD dist/ /mnt/packs
 
 ENV MAX_THREADS 200
 ENV MAX_CONNECTIONS 1000
@@ -49,7 +43,7 @@ EXPOSE $JPDA_ADDRESS
 RUN opkg update && \
   opkg install libapr libaprutil && \
   export TOMCAT_MAJOR_VERSION=`echo "$TOMCAT_VERSION" | cut -d. -f1` && \ 
-  wget -O /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz --progress=dot:giga http://artfiles.org/apache.org/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+  wget -O /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz --progress=dot:giga https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
   tar -C /tmp -xvzf /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
   rm /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
   mv -f /tmp/apache-tomcat-${TOMCAT_VERSION} ${CATALINA_HOME} && \
