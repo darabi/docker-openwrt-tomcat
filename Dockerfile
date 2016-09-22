@@ -4,17 +4,17 @@ FROM mcreations/openwrt-java:8
 
 MAINTAINER Reza Rahimi <rahimi@m-creations.net>
 
-ENV TOMCAT_VERSION=8.0.27
+ENV TOMCAT_VERSION=8.0.30
 
 ENV CATALINA_HOME /opt/apache-tomcat-${TOMCAT_VERSION}
 
-ENV DIST_DIR /mnt/packs
+# ENV DIST_DIR /mnt/packs
 
 ADD image/root /
 
-RUN mkdir -p /mnt/packs
+# RUN mkdir -p /mnt/packs
 
-ADD dist/ /mnt/packs
+# ADD dist/ /mnt/packs
 
 ENV MAX_THREADS 200
 ENV MAX_CONNECTIONS 1000
@@ -48,15 +48,18 @@ EXPOSE $JPDA_ADDRESS
 # Download TOMCAT and installing it
 RUN opkg update && \
   opkg install libapr libaprutil && \
-  export TOMCAT_MAJOR_VERSION=`echo "$TOMCAT_VERSION" | cut -d. -f1` && \
-  ([ -f $DIST_DIR/apache-tomcat-${TOMCAT_VERSION}.tar.gz ] ||  wget -O $DIST_DIR/apache-tomcat-${TOMCAT_VERSION}.tar.gz --progress=dot:giga http://apache.openmirror.de/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz) && \
-  tar -C /tmp -xvzf $DIST_DIR/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
-  rm $DIST_DIR/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+  export TOMCAT_MAJOR_VERSION=`echo "$TOMCAT_VERSION" | cut -d. -f1` && \ 
+  wget -O /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz --progress=dot:giga http://artfiles.org/apache.org/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+  tar -C /tmp -xvzf /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+  rm /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
   mv -f /tmp/apache-tomcat-${TOMCAT_VERSION} ${CATALINA_HOME} && \
   rm -f ${CATALINA_HOME}/bin/*.bat && \
+  rm -r ${CATALINA_HOME}/webapps/examples && \
+  rm -r ${CATALINA_HOME}/webapps/docs && \
+  rm -r ${CATALINA_HOME}/webapps/manager && \
+  rm -r ${CATALINA_HOME}/webapps/host-manager && \
   echo "export PATH=$PATH:$JAVA_HOME/bin/bundled:${CATALINA_HOME}/bin" >> /etc/profile && \
   echo "export CATALINA_HOME=${CATALINA_HOME}" >> /etc/profile
-
 
 # Expose port
 EXPOSE 8080
