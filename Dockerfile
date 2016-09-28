@@ -4,7 +4,7 @@ FROM mcreations/openwrt-java:8
 
 MAINTAINER Reza Rahimi <rahimi@m-creations.net>
 
-ENV TOMCAT_VERSION=8.0.30
+ENV TOMCAT_VERSION=8.0.37
 
 ENV CATALINA_HOME /opt/apache-tomcat-${TOMCAT_VERSION}
 
