@@ -4,7 +4,7 @@ FROM mcreations/openwrt-java:8
 
 MAINTAINER Reza Rahimi <rahimi@m-creations.net>
 
-ENV TOMCAT_VERSION=8.5.5
+ENV TOMCAT_VERSION=8.0.37
 
 ENV CATALINA_HOME /opt/apache-tomcat-${TOMCAT_VERSION}
 
@@ -24,7 +24,7 @@ ENV JVM_ARG_XSS 128m
 #   ssh -L 6970:localhost:6970 root@mesos-server-name.example.com
 # 2) Add following parameters to docker run:
 #  -p 6970:6970 \
-#  -e JAVA_RMI_SERVER_HOSTNAME=mesos-server-name.example.com 
+#  -e JAVA_RMI_SERVER_HOSTNAME=mesos-server-name.example.com
 # 3) Run jconsole from the client which use ssh port forwarding
 #    jconsole localhost:6970
 #
@@ -42,8 +42,8 @@ EXPOSE $JPDA_ADDRESS
 # Download TOMCAT and installing it
 RUN opkg update && \
   opkg install libapr libaprutil && \
-  export TOMCAT_MAJOR_VERSION=`echo "$TOMCAT_VERSION" | cut -d. -f1` && \ 
-  wget -O /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz --progress=dot:giga http://artfiles.org/apache.org/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+  export TOMCAT_MAJOR_VERSION=`echo "$TOMCAT_VERSION" | cut -d. -f1` && \
+  wget -O /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz --progress=dot:giga https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
   tar -C /tmp -xvzf /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
   rm /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
   mv -f /tmp/apache-tomcat-${TOMCAT_VERSION} ${CATALINA_HOME} && \
