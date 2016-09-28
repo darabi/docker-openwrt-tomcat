@@ -49,7 +49,7 @@ EXPOSE $JPDA_ADDRESS
 RUN opkg update && \
   opkg install libapr libaprutil && \
   export TOMCAT_MAJOR_VERSION=`echo "$TOMCAT_VERSION" | cut -d. -f1` && \ 
-  wget -O /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz --progress=dot:giga http://artfiles.org/apache.org/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+  wget -O /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz --progress=dot:giga https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
   tar -C /tmp -xvzf /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
   rm /tmp/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
   mv -f /tmp/apache-tomcat-${TOMCAT_VERSION} ${CATALINA_HOME} && \
