@@ -3,6 +3,8 @@
 #sed -i '1{G;s/$/export CATALINA_OPTS="$CATALINA_OPTS -server -Xms\${JVM_ARG_XMS} -Xmx\${JVM_ARG_XMX} -Xss\${JVM_ARG_XSS}"/}' $CATALINA_HOME/bin/catalina.sh
 export JPDA_RMI_SERVER_HOSTNAME="JAVA_RMI_SERVER_HOSTNAME"
 
+export CATALINA_OPTS="$CATALINA_OPTS -Dfile.encoding=UTF-8"
+export JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8"
 export CATALINA_OPTS="$CATALINA_OPTS -server -Xms${JVM_ARG_XMS} -Xmx${JVM_ARG_XMX} -Xss${JVM_ARG_XSS}"
 
 if [ -z "`grep \"modified by docker\" $CATALINA_HOME/conf/server.xml`" ]; then
